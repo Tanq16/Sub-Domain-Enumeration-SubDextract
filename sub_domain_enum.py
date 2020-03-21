@@ -99,7 +99,7 @@ def contentdict_enum(domain):
         aa = list(set(re.findall("htt.{2,20}" + domain, r.text)))
         if not len(aa) == 0:
             x = [up.unquote(i).split("//")[1] for i in aa if "//" in up.unquote(i)]
-            y = set(x)
+            y = list(set(x))
             for jj in y:
                 try:
                     r = session.get("http://" + jj, timeout=3)
