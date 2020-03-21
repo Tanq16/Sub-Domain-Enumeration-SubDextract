@@ -42,7 +42,7 @@ def crtsh_enum(domain):
     try:
         r = requests.get("https://crt.sh/?q=" + domain, headers={'User-Agent': usragent, 'Connection': 'Close'}, timeout=30)
         r.encoding = 'utf-8'
-        for dom in re.findall('<BR>([^ \.]+\.' + re.escape(domain) + ')', r.text):
+        for dom in re.findall("<BR>([^ \.]+\." + re.escape(domain) + ")", r.text):
             subdomains.append(dom)
         subdomains = list(set(subdomains))
         if len(subdomains) == 0 and "Too Many Requests" in r.text:
@@ -150,7 +150,7 @@ def se_enum(domain):
             limpage = (re.findall('<span>.{2,20} results<', r1.text)[0]).split(' results')[0].split('<span>')[1]
         else:
             limpage = '10'
-        limpage = min(100, int(limpage.replace(',', '')))
+        limpage = min(200, int(limpage.replace(',', '')))
         urls = ["https://search.yahoo.com/search?p=site%3A{0}&b={1}".format(domain, pages) for pages in range(10, limpage, 10)]
         with concurrent.futures.ThreadPoolExecutor(max_workers=limpage//10) as pool:
             responses = pool.map(sereq, urls)
@@ -192,6 +192,7 @@ def se_enum(domain):
 def dnsmx_enum(domain):
     # DNS resolve in x.509 certs
     subdomains = []
+    flag = True
     start = time.time()
     try:
         result = dns.resolver.query(domain, 'MX')
@@ -199,8 +200,10 @@ def dnsmx_enum(domain):
             subdomains.append(exdata.exchange.to_text())
     except:
         print(bcolors.WARNING + "Unknown error in dns resolver for " + domain + " - ", "%.2f" %(time.time() - start), bcolors.ENDC)
+        flag = False
     subdomains = list(set(subdomains))
-    print(bcolors.FAIL + "DNS MX Resolver for domain " + domain + " - ", "%.2f" %(time.time() - start), len(subdomains), bcolors.ENDC)
+    if flag:
+    	print(bcolors.FAIL + "DNS MX Resolver for domain " + domain + " - ", "%.2f" %(time.time() - start), len(subdomains), bcolors.ENDC)
     return subdomains
 
 def combined_enum(domain):
@@ -237,7 +240,7 @@ if len(sys.argv) > 2 and (sys.argv[2] == "-s" or "--save"):
     f.close()
     print(bcolors.HEADER + "Data stored in file " + bcolors.OKGREEN + user_dom.replace('.', '-') + bcolors.HEADER + " in current directory." + bcolors.ENDC)
 else:
-    for subdomain in data:
+    for subdomain in sorted(data):
         print(bcolors.OKBLUE + subdomain)
 
 print(bcolors.WARNING + "---------------------------------\nTotal Time taken", "%.2f" %(time.time() - starttime), bcolors.ENDC)
