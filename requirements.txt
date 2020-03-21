@@ -3,4 +3,5 @@ cryptography==2.8
 dnspython==1.16.0
 pyOpenSSL==19.1.0
 requests==2.21.0
+tranco==0.3
 win-unicode-console==0.5
