@@ -105,7 +105,7 @@ def contentdict_enum(domain):
                     r = session.get("http://" + jj, timeout=3)
                     session.close()
                     r.encoding = 'utf-8'
-                except requests.exceptions.Timeout:
+                except:
                     continue
                 bb = list(set(re.findall("htt.{2,20}" + domain, r.text)))
                 if not len(bb) == 0:
