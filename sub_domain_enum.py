@@ -27,6 +27,7 @@ class bcolors:
             import win_unicode_console , colorama
             win_unicode_console.enable()
             colorama.init()
+            OKBLUE = '\033[36m'
         except:
             HEADER = OKBLUE = OKGREEN = WARNING = FAIL = ENDC = ''
 
@@ -223,6 +224,17 @@ def combined_enum(domain):
     return subd
 
 starttime = time.time()
+
+print("""
+
+  _________    ___.   ________                  __                        __   
+ /   _____/__ _\\_ |__ \\______ \\   ____ ___  ___/  |_____________    _____/  |_ 
+ \\_____  \\|  |  | __ \\ |    |  \\_/ __ \\\\  \\/  \\   __\\_  __ \\__  \\ _/ ___\\   __\\
+ /        |  |  | \\_\\ \\|    `   \\  ___/ >    < |  |  |  | \\// __ \\\\  \\___|  |  
+/_______  |____/|___  /_______  /\\___  /__/\\_ \\|__|  |__|  (____  /\\___  |__|  
+        \\/          \\/        \\/     \\/      \\/                 \\/     \\/      
+
+	""")
 
 if len(sys.argv) < 2:
     print(bcolors.WARNING + "Usage: python sub_domain_enum.py <domain> [-s/--save]" +bcolors.ENDC)
