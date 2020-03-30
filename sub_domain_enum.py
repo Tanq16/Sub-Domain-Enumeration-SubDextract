@@ -221,6 +221,7 @@ def combined_enum(domain):
     for res in subdlist:
         subd += res
     subd = list(set(subd))
+    subd = list(set([dd.strip('.') for dd in subd]))
     return subd
 
 starttime = time.time()
