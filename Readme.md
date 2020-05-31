@@ -17,20 +17,12 @@ Installation is very simple - just install requirements and ensure required vers
 
 ```bash
 $ git clone https://github.com/Tanq16/Sub-Domain-Enumeration.git
-Cloning into 'Sub-Domain-Enumeration'...
-remote: Enumerating objects: 14, done.
-remote: Counting objects: 100% (14/14), done.
-remote: Compressing objects: 100% (12/12), done.
-remote: Total 14 (delta 2), reused 0 (delta 0), pack-reused 0
-Unpacking objects: 100% (14/14), 6.05 KiB | 413.00 KiB/s, done.
 $ cd 'Sub-Domain-Enumeration'
 $ pip3 install -r requirements.txt
-Collecting colorama==0.4.3 (from -r requirements.txt (line 1))
-......
 $ python sub_domain_enum.py domain.tld --save
 ```
 
-The `--save` option allows the subdomains to be written line wise to a file which is named in the format *domain-tld*.
+The `--save` option can be omitted. It allows the subdomains to be written line wise to a file which is named in the format *domain-tld*.
 
 ---
 
